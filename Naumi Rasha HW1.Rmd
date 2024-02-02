@@ -1,0 +1,65 @@
+---
+title: "PSYCH V0500 HW1"
+author: "NAUMI RASHA"
+date: "`r Sys.Date()`"
+output: html_document
+---
+R Basics for lecture 1 replication
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+> load("~/Documents/brfss22/BRFSS2022/BRFSS2022_rev.RData")
+> brfss22[1:10,1:6]
+> attach(brfss22)
+> summary(brfss22)
+> summary(SLEPTIM1[X_STATE == "New York"])
+> summary(SLEPTIM1[X_STATE == "Ohio"])
+> mean(SLEPTIM1[X_STATE == "New York"], na.rm = TRUE)
+> sd(SLEPTIM1[X_STATE == "New York"], na.rm = TRUE)
+> mean(SLEPTIM1[X_STATE == "Ohio"], na.rm = TRUE)
+> sd(SLEPTIM1[X_STATE == "Ohio"], na.rm = TRUE)
+> hist(SLEPTIM1[(SLEPTIM1 >5) & (SLEPTIM1 < 9)])
+> summary(SEXVAR)
+> summary(BIRTHSEX)
+> summary(GENHLTH)
+> summary(EDUCA)
+> install.packages("tidyverse")
+> install.packages("plyr")
+> library(plyr)
+> library(tidyverse)
+> summary(X_AGEG5YR)
+> summary(INCOME3)
+> ddply(brfss22, .(INCOME3), summarize, mean = round(mean(SLEPTIM1, na.rm = TRUE), 2), sd = round(sd(SLEPTIM1, na.rm = TRUE), 2), n_obsv = length(is.na(SLEPTIM1) == FALSE) )
+> ddply(brfss22, .(INCOME3), summarize, sleep90th = quantile(SLEPTIM1,probs = 0.9, na.rm = TRUE), sleep10th = quantile(SLEPTIM1,probs = 0.1, na.rm = TRUE), n_obs = length(is.na(SLEPTIM1) == FALSE) )
+> table(GENHLTH,SEXVAR)
+xtabs(~GENHLTH + SEXVAR)
+> prop.table(table(GENHLTH,SEXVAR))
+> mean(SLEPTIM1[(EDUCA == "College 4 years or more (College graduate)")], na.rm = TRUE)
+> restrict1 <- as.logical(EDUCA == "College 4 years or more (College graduate)")
+> dat_subset1 <- subset(brfss22, restrict1)
+> detach()
+> attach(dat_subset1)
+> mean(SLEPTIM1, na.rm = TRUE)
+> mean(brfss22$SLEPTIM1, na.rm = TRUE)
+> mean(dat_subset1$SLEPTIM1, na.rm = TRUE)
+Reflection: One thing I found interesting about the data was even with how much data there was, there could have been more diversity giving us more prospective in the data.
